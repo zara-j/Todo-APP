@@ -11,10 +11,13 @@ const Sidebar = (props: ISidebarProps) => {
       {/* aside for larger screens */}
       <aside className="w-full lg:w-1/4 border-r border-r-gray-400 hidden lg:block">
         <ul className="py-20 mx-auto px-5 flex flex-col gap-2">
-          <li className="text-green-900 hover:bg-cyan-500 rounded-lg p-2">All</li>
-          <li className=" hover:bg-cyan-500 rounded-lg p-2">Groceries</li>
-          <li className=" hover:bg-cyan-500 rounded-lg p-2">College</li>
-          <li className=" hover:bg-cyan-500 rounded-lg p-2">Payments</li>
+        {["All", "Groceries", "College", "Payments"].map((cat)=> (
+              <li 
+              className="hover:bg-cyan-500 rounded-lg p-2"
+              onClick={() => props.setSelectedCategory(cat as CategoryFilter)}>
+               {cat}
+              </li>
+            ))}
         </ul>
       </aside>
       {/* aside for mobile devices */}
