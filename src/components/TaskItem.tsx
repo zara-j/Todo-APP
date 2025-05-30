@@ -17,12 +17,19 @@ const TaskItem = (props: ITaskProps) => {
       key={props.t.id}
       className="flex justify-between items-center p-2 rounded"
     >
-      <input type="checkbox" 
-      checked= {props.t.completed}
-      onChange={() => props.toggleTaskCompletion(props.t.id)}
-      className="w-4 h-4 cursor-pointer"
-      />
-      <span className={`${props.t.completed ? 'line-through text-gray-400' : ''}`}>{props.t.task}</span>
+      <div className="flex justify-center items-center">
+        <input
+          type="checkbox"
+          checked={props.t.completed}
+          onChange={() => props.toggleTaskCompletion(props.t.id)}
+          className="w-4 h-4 cursor-pointer mx-2"
+        />
+        <span
+          className={`${props.t.completed ? "line-through text-gray-400" : ""}`}
+        >
+          {props.t.task}
+        </span>
+      </div>
       <div className="flex justify-center items-center gap-4">
         <span
           className={`${
