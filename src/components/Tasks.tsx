@@ -19,7 +19,7 @@ const Tasks = (props: ITaskProps) => {
      props.addTaskHandler();
   }
   return (
-    <>
+    <div className="flex flex-col xl:flex-row gap-2">
       <input
         type="text"
         name="task"
@@ -27,12 +27,12 @@ const Tasks = (props: ITaskProps) => {
         onChange={(e) => props.setTask(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Add a new task inside All category"
-        className="lg:w-64 w-46 input input-info bg-gray-100 mx-1"
+        className="w-full input input-info bg-gray-100"
       />
       <select
         value={props.category}
         onChange={(e) => props.setCategory(e.target.value as Category)}
-        className="select w-20 select-info bg-gray-100 mx-1"
+        className="select w-full xl:w-20 select-info bg-gray-100"
       >
         <option value="Uncategorized">Uncategorized</option>
         <option value="Groceries">Groceries</option>
@@ -40,10 +40,10 @@ const Tasks = (props: ITaskProps) => {
         <option value="Payments">Payments</option>
       </select>
       <button 
-      className="mx-1 btn btn-outline btn-info"
+      className="btn btn-outline btn-info"
       onClick={handleClick}
       >Add</button>
-    </>
+    </div>
   );
 };
 
