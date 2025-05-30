@@ -15,9 +15,13 @@ const App = () => {
   const [todos, setTodos] = useState<Itask[]>([]);
   const [category, setCategory] = useState<Category>("Uncategorized");
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   const addTaskHandler = () => {
-    if (!task.trim()) return;
+    if (!task.trim()) {
+      setShowModal(true)
+      return;
+    }
     const newTask: Itask = {
       id: Date.now(),
       task,
