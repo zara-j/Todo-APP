@@ -2,6 +2,7 @@ import { useState } from "react";
 import Tasks from "./components/Tasks";
 import Sidebar from "./components/Sidebar";
 import TaskItem from "./components/TaskItem";
+import Modal from "./components/Modal";
 
 export type Category = "Uncategorized" | "Groceries" | "College" | "Payments";
 export type CategoryFilter = Category | "All";
@@ -15,12 +16,14 @@ const App = () => {
   const [todos, setTodos] = useState<Itask[]>([]);
   const [category, setCategory] = useState<Category>("Uncategorized");
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalMsg, setModalMsg] = useState<string>("")
 
   // function for adding task
   const addTaskHandler = () => {
     if (!task.trim()) {
       setShowModal(true)
+      setModalMsg("Please enter a task before adding")
       return;
     }
     const newTask: Itask = {
@@ -47,23 +50,7 @@ const App = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       {showModal && (
-        <dialog open className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Oops!</h3>
-            <p className="py-4">Please enter a task before adding.</p>
-            <div className="modal-action">
-              <button 
-                className="btn" 
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-          <form method="dialog" className="modal-backdrop">
-            <button onClick={() => setShowModal(false)}>close</button>
-          </form>
-        </dialog>
+      <Modal setShowModal={setShowModal} ModalMsg={modalMsg} />
       )}
       <div className="container flex flex-col lg:flex-row max-w-full lg:max-w-4xl h-screen lg:h-[600px] bg-white rounded-lg shadow-lg overflow-hidden">
         <Sidebar
