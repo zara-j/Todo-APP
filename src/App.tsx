@@ -17,6 +17,7 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
   const [showModal, setShowModal] = useState<boolean>(false)
 
+  // function for adding task
   const addTaskHandler = () => {
     if (!task.trim()) {
       setShowModal(true)
@@ -31,10 +32,13 @@ const App = () => {
     setTask("");
     setCategory("Uncategorized");
   };
+
+  // function for deleting task
   const deleteTaskHandler = (taskId: number) => {
     setTodos(todos.filter((t) => t.id !== taskId));
   };
 
+  // function for filtering categories
   const filteredTasks =
     selectedCategory === "All"
       ? todos
@@ -42,6 +46,25 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
+      {showModal && (
+        <dialog open className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Oops!</h3>
+            <p className="py-4">Please enter a task before adding.</p>
+            <div className="modal-action">
+              <button 
+                className="btn" 
+                onClick={() => setShowModal(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button onClick={() => setShowModal(false)}>close</button>
+          </form>
+        </dialog>
+      )}
       <div className="container flex flex-col lg:flex-row max-w-full lg:max-w-4xl h-screen lg:h-[600px] bg-white rounded-lg shadow-lg overflow-hidden">
         <Sidebar
           selectedCategory={selectedCategory}
