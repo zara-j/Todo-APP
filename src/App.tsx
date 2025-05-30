@@ -38,6 +38,8 @@ const App = () => {
 
   // function for deleting task
   const deleteTaskHandler = (taskId: number) => {
+    setShowModal(true)
+    setModalMsg("Task deleted successfully")
     setTodos(todos.filter((t) => t.id !== taskId));
   };
 
@@ -68,7 +70,7 @@ const App = () => {
           />
           <ul className="mt-4 space-y-2">
             {filteredTasks.map((t) => (
-              <TaskItem t={t} deleteTaskHandler={deleteTaskHandler} />
+              <TaskItem key={t.id} t={t} deleteTaskHandler={deleteTaskHandler}/>
             ))}
           </ul>
         </main>
